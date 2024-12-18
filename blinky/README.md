@@ -2,10 +2,10 @@
 Display a pattern on 16 leds. The pattern changes when the waveform mode button is pressed, which emits a pulse via a external pulse circuit. The code allows only a change in pattern when the button signal goes from low to high. The pattern repeats continuously until the button is pressed or the circuit is reset, then it  begins the pattern again.
 
 #### Block Diagram
-![image](../../images/blinky_bd.png)
+![image](../images/blinky_bd.png)
 
 #### Blinky Schematic
-![image](../../images/riscv_blinky.png)
+![image](../images/riscv_blinky.png)
 
 #### x30 GPIO allocation
 Output:
@@ -296,4 +296,4 @@ bnez
 lui
 ```
 #### Testing app via x30 GPIO bits 
-![image](../../images/blinky_test.png)
+![image](../images/blinky_test.png)
