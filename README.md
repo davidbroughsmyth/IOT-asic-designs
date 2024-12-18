@@ -1,4 +1,4 @@
-### IOT Apps
+### Riscv IOT based Apps - target for FPGA or ASIC layout
 1. ZeroRV and NopRV - does nothing but has the smallest cpu footprint
 1. Doorbell - rings a bell when a button is pushed
 1. Blinky - displays a pattern on leds
