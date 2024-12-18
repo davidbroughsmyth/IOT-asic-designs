@@ -306,8 +306,8 @@ run_lvs
 run_magic_gds_export
 ```
 
-The final layout using KLayout of the doorbell app is shown below.
+The final layout of the doorbell app using KLayout:
 ![image](../images/doorbell-gds-klayout.jpg)
 
-The final layout using GDS viewer of the doorbell app with the sky130 standard cells is shown below.
+The final layout of the doorbell app with the sky130 standard cells using GDS viewer:
 ![image](../images/doorbell_gds_layout.png)
