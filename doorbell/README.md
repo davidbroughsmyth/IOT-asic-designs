@@ -315,8 +315,8 @@ The placement of the doorbell app is shown below.
 The routing of the doorbell app is shown below.
 ![image](../images/doorbell_routing.png)
 
-The final layout of the doorbell app is shown below.
-![image](../images/doorbell_layout.png)
+The final layout using KLayout of the doorbell app is shown below.
+![image](../images/doorbell-gds-klayout.png)
 
-The final layout of the doorbell app with the sky130 standard cells is shown below.
-![image](../images/doorbell_layout_cells.png)
+The final layout using GDS viewer of the doorbell app with the sky130 standard cells is shown below.
+![image](../images/.doorbell_gds_layou.tpng)
