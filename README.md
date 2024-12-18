@@ -23,7 +23,7 @@ flags: -ci or -c -i to count instructions, -h this help
 ### Tooling for Verilog generation, simulation and synthesis, FPGA programming, and ASIC design
 
 #### Yosys (VM install): https://github.com/YosysHQ/yosys
-Installing Yosys on the vsdworkshop VM. Install the latest by entering the following commands in the terminal:
+Installing Yosys on Linux or via a Linux based VM. Install the latest by entering the following commands in the terminal:
 ```
 apt install build-essential clang bison flex libreadline-dev \
     gawk tcl-dev libffi-dev git graphviz \
