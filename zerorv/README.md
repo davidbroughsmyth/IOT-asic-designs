@@ -91,7 +91,7 @@ Disassembly of section .text:
 ```
 
 #### Block Diagram
-![image](../../images/zerorv_bd.png)
+![image](../images/zerorv_bd.png)
 
 #### ZeroRV Complilation and assembly
 ```
@@ -115,14 +115,14 @@ iverilog -o verorv_v testbench.v processor.v
 ```
 vvp zerorv_v
 ```
-![image](../../images/zerorv_verilog_run1.png)
-![image](../../images/zerorv_verilog_run2.png)
+![image](../images/zerorv_verilog_run1.png)
+![image](../images/zerorv_verilog_run2.png)
 
 -- display gtkwave for ZeroRV
 ```
 gtkwave.vcd waveform.vcd
 ```
-![image](../../images/zerorv_gtkwave.png)
+![image](../images/zerorv_gtkwave.png)
 
 ### Verilog NopRV
 -- compiler verilog with test bench
@@ -135,13 +135,13 @@ iverilog -o noprv_v testbench.v processor.v
 ```
 vvp noprv_v
 ```
-![image](../../images/noprv_verilog_run.png)
+![image](../images/noprv_verilog_run.png)
 
 -- display gtkwave for NopRV
 ```
 gtkwave.vcd waveform.vcd
 ```
-![image](../../images/noprv_gtkwave.png)
+![image](../images/noprv_gtkwave.png)
 
 ---
 The objective for this exercise is complete. I wont be continuing it further.

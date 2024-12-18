@@ -2,10 +2,10 @@
 Very basic doorbell with one button to activate a bell
 
 #### Block Diagram
-![image](../../images/riscv_doorbell_bd.png)
+![image](../images/riscv_doorbell_bd.png)
 
 #### Doorbell Schematic
-![image](../../images/riscv_doorbell.png)
+![image](../images/riscv_doorbell.png)
 
 #### x30 GPIO allocation
 Output:
@@ -109,7 +109,7 @@ and
 add
 ```
 #### Testing app via x30 GPIO bits
-![image](../../images/doorbell_test.png)
+![image](../images/doorbell_test.png)
 
 #### Pre-config Verilog generation
 Unmodified ChipCron processor.v and testbench.v doing a verilog run. This tests out the doorbell program loading from the uart.
@@ -117,14 +117,14 @@ Unmodified ChipCron processor.v and testbench.v doing a verilog run. This tests 
 iverilog -o doorbell_v testbench.v  processor.v
 vvp doorbell_v
 ```
-![image](../../images/doorbell_verilog_run1.png)
-![image](../../images/doorbell_verilog_run2.png)
+![image](../images/doorbell_verilog_run1.png)
+![image](../images/doorbell_verilog_run2.png)
 
 -- running simulator with -fst flag to compress the .vcd file as the native file waveform can get very large. A smaller .vcd helps gtkwave to load faster.
 ```
 vvp doorbell_v -fst
 ```
-![image](../../images/doorbell_run_fst.png)
+![image](../images/doorbell_run_fst.png)
 #### GPIO Config
 *processor_gpio_doorbell.v* gpio input and output verilog changes where input_gpio_pins is bit 31 of the x30 register and top_gpio_pins[0:0] is bit 0 of the x30 register
 ```
@@ -181,38 +181,38 @@ The delay does 1000000 for loop cycles which is too long to see input/output cha
 gtkwave waveform.vcd
 ```
 Showing the input_wires simulating the button being pressed but the buzzer not being activated until the very long timing delay code has completed.
-![image](../../images/doorbell_longdelay.png)
+![image](../images/doorbell_longdelay.png)
 
 From device reset to the first instruction *fe010113 add sp,sp,-32*, the code  execution is shown in detail.
-![image](../../images/doorbell_longdelay_detailsignals.png)
+![image](../images/doorbell_longdelay_detailsignals.png)
 #### Simulations with long timing delay code disabled
 The delay code has been limited to 2 for loop cycles for these simulations.
 ```
 gtkwave waveform.vcd
 ```
 Just showing the input_wires simulating the button being pressed and the buzzer being activated, the output_wire has brief pulses to 0 while the button is pressed. This is due to the code for function setBuzzer() where the x30 register is ANDed with 0xFFFFFFFE to clear the bit 0 then is ANDed with the GPIO_buzz_bit which is 1 to set the bit 0 to 1 again.
-![image](../../images/doorbell_just-inputoutputs.png)
+![image](../images/doorbell_just-inputoutputs.png)
 
 The whole input and output simulation cycle. Also showing input glitching when the button is pressed but still debounce even though the delay code has been limited to 2 for loop cycles.
-![image](../../images/doorbell_input-output_cycle.png)
+![image](../images/doorbell_input-output_cycle.png)
 
 From device reset to the first instruction *fe010113 add sp,sp,-32*.
-![image](../../images/doorbell_firstinstructon.png)
+![image](../images/doorbell_firstinstructon.png)
 
 Showing debounce input
-![image](../../images/doorbell_debounce-input.png)
+![image](../images/doorbell_debounce-input.png)
 
 The setBuzzer() ORing instruction *00ff6f33 or	t5,t5,a5* setting the buzzer output to 1.
-![image](../../images/doorbell_orinstruct-bellLtoH.png)
+![image](../images/doorbell_orinstruct-bellLtoH.png)
 
 Showing when the input goes from high to low the x30 register bit 31 is set to 0 but bit 0 is still set to 1.
-![image](../../images/doorbell_bntHtoL_x30reg.png)
+![image](../images/doorbell_bntHtoL_x30reg.png)
 
 The lag from when input_wire goes low to high and the buzzer output goes low to high is due to code processng and the 2 loop delay code.
-![image](../../images/doorbell_OrInstruct-zoomout.png)
+![image](../images/doorbell_OrInstruct-zoomout.png)
 
 Input_wire goes high to low then the low-high high-low glitch, we see the GPIO signals and x30 register bit 31 changing from 1 to 0 and then back to 1 and 0. The output stays high due to lag in the code and ignores the glitch.
-![image](../../images/doorbell_buttonHtoL.png)
+![image](../images/doorbell_buttonHtoL.png)
 
 -- Possible Improvements
 1. Have the delay limited from reset and only enable the long delay when a external input wire goes high. This would allow the buzzer to be activated quicker when the circuit is under test or simulation.
@@ -233,7 +233,7 @@ Showing visual gates for wrapper module
 ```
 yosys> show -colors 2 -width -signed wrapper
 ```
-![image](../../images/doorbell_wrapper_gates.png)
+![image](../images/doorbell_wrapper_gates.png)
 
 ### ASIC Gate Level Simulation
 config:
@@ -251,13 +251,13 @@ yosys> dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
 yosys> abc -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
 yosys> write_verilog synth_asic_processor.v
 ```
-![image](../../images/doorbell_sky130_cells.png)
+![image](../images/doorbell_sky130_cells.png)
 
 Showing visual gates for wrapper module
 ```
 yosys> show -colors 2 -width -signed wrapper
 ```
-![image](../../images/doorbell_sky130_gates.png)
+![image](../images/doorbell_sky130_gates.png)
 
 
 Modify the *synth_asic_processor.v* to point to the external sram verilog modules in file *doorbell_nodelay_sky130_sram_1kbyte_1rw1r_32x256_8.v* by changing the sram module names. The new file with the changes is called *synth_asic_processor_sram.v*.
@@ -281,11 +281,11 @@ gtkwave waveform.vcd
 ```
 
 After synthesising the verilog for ASIC gate level simulation with external sram, the doorbell app is working as expected as shown in the waveform.
-![image](../../images/doorbell_asic_gls_sram.png)
+![image](../images/doorbell_asic_gls_sram.png)
 
 ### Physical design using Openlane
 The physical design of the doorbell app is done using Openlane. The Openlane flow is shown below.
-![image](../../images/openlane_flow.png)
+![image](../images/openlane_flow.png)
 
 The Openlane flow is run using the following commands.
 ```
@@ -307,16 +307,16 @@ run_magic_gds_export
 ```
 
 The floorplan of the doorbell app is shown below.
-![image](../../images/doorbell_floorplan.png)
+![image](../images/doorbell_floorplan.png)
 
 The placement of the doorbell app is shown below.
-![image](../../images/doorbell_placement.png)
+![image](../images/doorbell_placement.png)
 
 The routing of the doorbell app is shown below.
-![image](../../images/doorbell_routing.png)
+![image](../images/doorbell_routing.png)
 
 The final layout of the doorbell app is shown below.
-![image](../../images/doorbell_layout.png)
+![image](../images/doorbell_layout.png)
 
 The final layout of the doorbell app with the sky130 standard cells is shown below.
-![image](../../images/doorbell_layout_cells.png)
+![image](../images/doorbell_layout_cells.png)

@@ -2,10 +2,10 @@
 Secure code doorlock with tamper proof door locking/unlocking. Inputs are 1. tamper switch 2. keypad. Output are 1. lock led 2. lock/unlock buzzer 3. doorlock solenoid 
 
 #### Block Diagram
-![image](../../images/doorlock_bd.png)
+![image](../images/doorlock_bd.png)
 
 #### Secure code doorlock Schematic
-![image](../../images/riscv_doorlock.png)
+![image](../images/riscv_doorlock.png)
 
 #### x30 GPIO allocation
 Output:
@@ -31,4 +31,4 @@ Input:
 ```
 ```
 #### Testing app via x30 GPIO bits 
-![image](../../images/doorlock_test.png)
+![image](../images/doorlock_test.png)
