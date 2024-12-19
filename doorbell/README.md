@@ -1,6 +1,6 @@
 ### Doorbell Risc-v ISA based IOT device
 Very basic doorbell with one button to activate a bell
-The implementation is using Verilog to define a small Risc-v processor optimised to run the doorbell program
+The implementation is using Verilog to define a small Risc-v processor optimised to run the doorbell program, then use Openlane to build the physical design ffor a ASIC chip.  
 
 #### Block Diagram
 ![image](../images/riscv_doorbell_bd.png)
